@@ -18,7 +18,7 @@
  * 
  */
 
-package com.db.desafio.votacao.v1.controllers;
+package com.db.desafio.votacao.v1.controllers.utilities;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
