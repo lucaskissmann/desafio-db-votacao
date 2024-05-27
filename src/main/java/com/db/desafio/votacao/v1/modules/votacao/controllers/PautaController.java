@@ -17,7 +17,7 @@
  * 
  */
 
-package com.db.desafio.votacao.v1.controllers;
+package com.db.desafio.votacao.v1.modules.votacao.controllers;
 
 import java.util.List;
 
@@ -30,10 +30,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.db.desafio.votacao.v1.controllers.utilities.Controller;
-
-import com.db.desafio.votacao.v1.models.Pauta;
-import com.db.desafio.votacao.v1.services.PautaService;
+import com.db.desafio.votacao.v1.modules.Controller;
+import com.db.desafio.votacao.v1.modules.votacao.data.models.Pauta;
+import com.db.desafio.votacao.v1.modules.votacao.services.PautaService;
 
 @RestController
 @RequestMapping( path = Controller.VERSION + "pautas" )

@@ -17,15 +17,15 @@
  * 
  */
 
-package com.db.desafio.votacao.v1.services;
+package com.db.desafio.votacao.v1.modules.votacao.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.db.desafio.votacao.v1.models.Pauta;
-import com.db.desafio.votacao.v1.repositories.PautaRepository;
+import com.db.desafio.votacao.v1.modules.votacao.data.models.Pauta;
+import com.db.desafio.votacao.v1.modules.votacao.data.repositories.PautaRepository;
 
 
 @Service

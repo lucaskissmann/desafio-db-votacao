@@ -17,7 +17,7 @@
  * 
  */
 
-package com.db.desafio.votacao.v1.models;
+package com.db.desafio.votacao.v1.modules.votacao.data.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

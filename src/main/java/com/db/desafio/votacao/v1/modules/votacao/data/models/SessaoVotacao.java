@@ -1,7 +1,7 @@
 /**
- * Filename:    Pauta.java
+ * Filename:    SessaoVotacao.java
  *
- * Description: Implementation of the Pauta class.
+ * Description: Implementation of the SessaoVotacao class.
  *
  * Revision:    1.0
  *
@@ -17,16 +17,19 @@
  * 
  */
 
-package com.db.desafio.votacao.v1.models;
+package com.db.desafio.votacao.v1.modules.votacao.data.models;
+
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -34,17 +37,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Builder
-@Table( name = "pautas" )
-public class Pauta 
+@Table( name = "sessoes" )
+public class SessaoVotacao 
 {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private Long id;
+    private Long id;    
 
-    @Column( name = "name", nullable = false )
-    private String name;
+    @ManyToOne
+    @JoinColumn( name = "ref_pauta" )
+    private Pauta pauta;
 
-    @Column( name = "description", nullable = true )
-    private String description;
+    @Column( name = "start_date", nullable = false )
+    private LocalDateTime startDate;
+
+    @Column( name = "end_date", nullable = false )
+    private LocalDateTime endDate;
 }
