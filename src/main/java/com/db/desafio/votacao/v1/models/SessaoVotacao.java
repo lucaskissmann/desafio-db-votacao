@@ -41,8 +41,8 @@ import lombok.NoArgsConstructor;
 public class SessaoVotacao 
 {
     @Id
-    @GeneratedValue( strategy = GenerationType.UUID )
-    private String id;    
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
+    private Long id;    
 
     @ManyToOne
     @JoinColumn( name = "ref_pauta" )

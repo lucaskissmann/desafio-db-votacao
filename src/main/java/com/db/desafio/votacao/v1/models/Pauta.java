@@ -39,8 +39,8 @@ import lombok.NoArgsConstructor;
 public class Pauta 
 {
     @Id
-    @GeneratedValue( strategy = GenerationType.UUID )
-    private String id;
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
+    private Long id;
 
     @Column( name = "name", nullable = false )
     private String name;
