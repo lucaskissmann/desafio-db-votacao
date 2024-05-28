@@ -20,9 +20,11 @@
 package com.db.desafio.votacao.v1.modules.votacao.data.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Pauta;
 
+@Repository
 public interface PautaRepository 
     extends
         JpaRepository<Pauta, Long> 
