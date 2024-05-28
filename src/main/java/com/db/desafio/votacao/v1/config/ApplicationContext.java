@@ -24,10 +24,10 @@ import java.time.LocalDateTime;
 
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.db.desafio.votacao.v1.modules.Controller;
-
 public class ApplicationContext 
 {
+    public static final String VERSION = "v1/";
+
     /**
      * getServerBaseUrl
      * 
@@ -35,7 +35,7 @@ public class ApplicationContext
      */
     public static String getServerBaseUrl() 
     {
-        return ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + "/" + Controller.VERSION;
+        return ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + "/" + VERSION;
     }
 
     /**
