@@ -24,12 +24,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.db.desafio.votacao.v1.config.ApplicationContext;
 import com.db.desafio.votacao.v1.modules.Controller;
+import com.db.desafio.votacao.v1.modules.votacao.data.dtos.PautaDTO;
 import com.db.desafio.votacao.v1.modules.votacao.data.dtos.RegisterPautaDTO;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Pauta;
 import com.db.desafio.votacao.v1.modules.votacao.services.PautaService;
@@ -37,7 +40,7 @@ import com.db.desafio.votacao.v1.modules.votacao.services.PautaService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping( path = Controller.VERSION + "pautas" )
+@RequestMapping( path = ApplicationContext.VERSION + "pautas" )
 public class PautaController
     extends
         Controller
@@ -68,5 +71,17 @@ public class PautaController
     public ResponseEntity<Pauta> createPauta( @RequestBody @Valid RegisterPautaDTO pautaDTO )
     {
         return created( pautaService.createPauta( pautaDTO ));
+    }
+
+    /**
+     * getPautaResult
+     * 
+     * @param pautaId long
+     * @return ResponseEntity<PautaResultDTO>
+     */
+    @GetMapping("{pautaId}")
+    public ResponseEntity<PautaDTO> getPautaResult( @PathVariable("pautaId") long pautaId )
+    {
+        return ok( pautaService.getPautaResult( pautaId ));
     }
 }

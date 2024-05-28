@@ -40,7 +40,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class RegisterPautaDTO
 {
-
 	@NotNull( message = "O ID da assembleia é obrigatório." )
 	private long assembleiaId;
 

@@ -19,14 +19,21 @@
 
 package com.db.desafio.votacao.v1.modules.votacao.services;
 
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.db.desafio.votacao.v1.helpers.exceptions.BadRequestException;
 import com.db.desafio.votacao.v1.helpers.exceptions.NotFoundException;
+import com.db.desafio.votacao.v1.modules.votacao.data.dtos.PautaDTO;
 import com.db.desafio.votacao.v1.modules.votacao.data.dtos.RegisterPautaDTO;
+import com.db.desafio.votacao.v1.modules.votacao.data.enums.VotoEnum;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Pauta;
+import com.db.desafio.votacao.v1.modules.votacao.data.models.Voto;
 import com.db.desafio.votacao.v1.modules.votacao.data.repositories.PautaRepository;
 
 
@@ -96,5 +103,36 @@ public class PautaService
     public void updatePauta( Pauta pauta )
     {
         this.pautaRepository.save( pauta );
+    }
+
+    /**
+     * getPautaResult
+     * 
+     * @param pautaId long
+     * @return PautaDTO
+     */
+    public PautaDTO getPautaResult( long pautaId )
+    {
+        Pauta pauta = this.getPautaById( pautaId ); 
+
+        if( pauta.getVotos().isEmpty() )
+        {
+            throw new BadRequestException( "Não há nenhum voto para a pauta de id: #" + pautaId );
+        }
+
+        Map<VotoEnum, Long> voteCount = pauta.getVotos().stream()
+                                                        .collect(Collectors.groupingBy(Voto::getVoto, 
+                                                            () -> new EnumMap<>(VotoEnum.class), 
+                                                            Collectors.counting()));
+
+        return PautaDTO.builder()
+                .pautaId( pauta.getId() )
+                .status( pauta.getState() )
+                .total( pauta.getVotos().size() )
+                .approved( voteCount.get( VotoEnum.SIM ))
+                .rejected( voteCount.get( VotoEnum.NAO ))
+                .abstention( voteCount.get( VotoEnum.ABSTENCAO ))
+                .protest( voteCount.get( VotoEnum.BRANCO ))
+                .build();
     }
 }

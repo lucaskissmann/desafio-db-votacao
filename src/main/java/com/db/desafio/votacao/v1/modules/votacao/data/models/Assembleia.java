@@ -77,5 +77,17 @@ public class Assembleia
             )
         }
     )
+    @Builder.Default
     List<Pauta> pautas = new ArrayList<>();
+
+    /**
+     * addPauta
+     * 
+     * @param pauta Pauta
+     */
+    public void addPauta( Pauta pauta )
+    {
+        this.pautas.add( pauta );
+    }
+
 }
