@@ -25,15 +25,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.db.desafio.votacao.v1.config.ApplicationContext;
 import com.db.desafio.votacao.v1.modules.Controller;
+import com.db.desafio.votacao.v1.modules.votacao.data.dtos.RegisterAssembleiaDTO;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Assembleia;
 import com.db.desafio.votacao.v1.modules.votacao.services.AssembleiaService;
 
+import jakarta.validation.Valid;
+
 @RestController
-@RequestMapping( path = Controller.VERSION + "assembleias" )
+@RequestMapping( path = ApplicationContext.VERSION + "assembleias" )
 public class AssembleiaController
     extends 
         Controller
@@ -61,5 +67,17 @@ public class AssembleiaController
     public ResponseEntity<Assembleia> getAssembleia( @PathVariable("assembleiaId") long assembleiaId )
     {
         return ok( assembleiaService.getAssembleiaById( assembleiaId ));
+    }
+
+    /**
+     * createAssembleia
+     * 
+     * @param assembleiaDTO RegisterAssembleiaDTO
+     * @return ResponseEntity<Assembleia>
+     */
+    @PostMapping()
+    public ResponseEntity<Assembleia> createAssembleia( @RequestBody @Valid RegisterAssembleiaDTO assembleiaDTO )
+    {
+        return created( assembleiaService.createAssembleia( assembleiaDTO ));
     }
 }
