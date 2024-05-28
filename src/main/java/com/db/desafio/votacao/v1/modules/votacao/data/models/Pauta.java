@@ -19,12 +19,26 @@
 
 package com.db.desafio.votacao.v1.modules.votacao.data.models;
 
+import java.time.LocalDateTime;
+
+import java.util.List;
+
+import com.db.desafio.votacao.v1.modules.votacao.data.enums.PautaEnum;
+import com.db.desafio.votacao.v1.modules.votacao.data.enums.VotoEnum;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -47,4 +61,90 @@ public class Pauta
 
     @Column( name = "description", nullable = true )
     private String description;
+
+    @OneToMany( cascade = CascadeType.ALL )
+	@JoinTable(
+        name = "pauta_votacoes", 
+        joinColumns = {
+		    @JoinColumn(
+                name = "ref_pauta",
+                referencedColumnName = "id"
+            )
+        },
+        inverseJoinColumns = {
+		    @JoinColumn(
+                name = "ref_votos",
+                referencedColumnName = "id"
+            )
+        }
+    )
+	private List<Voto> votos;
+
+    private LocalDateTime startDate;
+	private LocalDateTime endDate;
+
+    @Transient
+    @Enumerated( EnumType.STRING )
+    private PautaEnum state;
+
+    /**
+     * getState
+     * 
+     * @return PautaEnum
+     */
+    public PautaEnum getState()
+    {
+        updateState();
+
+        return this.state;
+    }
+
+    /**
+     * updateState
+     */
+    public void updateState()
+    {
+        if( isVotingPeriodActive() )
+        {
+            this.state = PautaEnum.AGUARDANDO_VOTACAO;
+        }
+        else 
+        {
+            updateStateBasedOnVotes();
+        }
+    }
+
+    /**
+     * isVotingPeriodActive
+     * 
+     * @return boolean
+     */
+    private boolean isVotingPeriodActive() 
+    {
+        return endDate.isAfter( LocalDateTime.now() );
+    }
+
+    /**
+     * updateStateBasedOnVotes
+     * 
+     */
+    private void updateStateBasedOnVotes() 
+    {
+        long approvedVotes = votos.stream().filter( voto -> voto.getVoto().equals( VotoEnum.SIM )).count();
+        long reprovedVotes = votos.stream().filter( voto -> voto.getVoto().equals( VotoEnum.NAO )).count();
+
+        if( approvedVotes == reprovedVotes ) 
+        {
+            this.state = PautaEnum.EMPATADA;
+
+        } 
+        else if( approvedVotes > reprovedVotes ) 
+        {
+            this.state = PautaEnum.APROVADA;
+        }
+        else 
+        {
+            this.state = PautaEnum.REPROVADA;
+        }
+    }
 }

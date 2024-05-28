@@ -19,6 +19,8 @@
 
 package com.db.desafio.votacao.v1.modules.votacao.data.models;
 
+import com.db.desafio.votacao.v1.modules.votacao.data.enums.VotoEnum;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,13 +45,14 @@ public class Voto
     private Long id;
 
     @ManyToOne
+    @JoinColumn( name = "ref_pauta" )
+    private Pauta pauta;
+    
+    @ManyToOne
     @JoinColumn( name = "ref_associado" )
     private Associado associado;
 
-    @ManyToOne
-    @JoinColumn( name = "ref_pauta" )
-    private Pauta pauta;
 
     @Column( name = "voto", nullable = false )
-    private boolean voto;
+    private VotoEnum voto;
 }
