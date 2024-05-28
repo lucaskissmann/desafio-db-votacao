@@ -149,4 +149,14 @@ public class Pauta
             this.state = PautaEnum.REPROVADA;
         }
     }
+
+    /**
+     * addVoto
+     * 
+     * @param voto Voto
+     */
+    public void addVoto( Voto voto )
+    {
+        this.votos.add( voto );
+    }
 }

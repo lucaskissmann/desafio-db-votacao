@@ -29,5 +29,5 @@ public interface VotoRepository
     extends
         JpaRepository<Voto, Long> 
 {
-    
+	boolean existsByAssociadoIdAndPautaId( Long associadoId, Long pautaId );
 }
