@@ -22,7 +22,6 @@ package com.db.desafio.votacao.v1.modules.votacao.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,8 +30,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.db.desafio.votacao.v1.modules.Controller;
+import com.db.desafio.votacao.v1.modules.votacao.data.dtos.RegisterPautaDTO;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Pauta;
 import com.db.desafio.votacao.v1.modules.votacao.services.PautaService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping( path = Controller.VERSION + "pautas" )
@@ -63,8 +65,8 @@ public class PautaController
      * @return ResponseEntity<Pauta>
      */
     @PostMapping()
-    public ResponseEntity<Pauta> createPauta( @RequestBody Pauta pauta )
+    public ResponseEntity<Pauta> createPauta( @RequestBody @Valid RegisterPautaDTO pautaDTO )
     {
-        return new ResponseEntity<>( pautaService.createPauta( pauta ), HttpStatus.CREATED );
+        return created( pautaService.createPauta( pautaDTO ));
     }
 }

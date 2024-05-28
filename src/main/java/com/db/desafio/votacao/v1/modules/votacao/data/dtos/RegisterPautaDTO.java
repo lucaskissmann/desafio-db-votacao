@@ -42,23 +42,25 @@ public class RegisterPautaDTO
 {
 
 	@NotNull( message = "O ID da assembleia é obrigatório." )
-	String assembleiaId;
+	private long assembleiaId;
+
+	@NotNull( message = "O nome da pauta é obrigatório." )
+	private String name;
 
 	@Builder.Default
-	private String description = "Pauta sem descrição";
+	private String description = "";
 
 	@Builder.Default
 	@JsonIgnore
 	private List<Voto> votos = new ArrayList<>();
 
 	@Builder.Default
-	private LocalDateTime inicio = ApplicationContext.now();
+	private LocalDateTime startDate = ApplicationContext.now();
 
 	@Builder.Default
-	private LocalDateTime fim = ApplicationContext.now().plusMinutes( 1 );
+	private LocalDateTime endDate = ApplicationContext.now().plusMinutes( 1 );
 
 	@Builder.Default
 	@JsonIgnore
 	private PautaEnum state = PautaEnum.AGUARDANDO_VOTACAO;
-
 }

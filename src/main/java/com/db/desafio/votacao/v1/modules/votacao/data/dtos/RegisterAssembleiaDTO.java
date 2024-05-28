@@ -44,14 +44,14 @@ public class RegisterAssembleiaDTO
 	String name;
 
 	@Builder.Default
-	private String description = "Assembleia sem descrição";
+	private String description = "";
 
 	@Builder.Default
 	@JsonIgnore
 	private List<Pauta> pautas = new ArrayList<>();
 
 	@Builder.Default
-	private LocalDate creationDate = LocalDate.now();
+	private LocalDate createdAt = LocalDate.now();
 
 	@Builder.Default
 	private LocalDateTime startDate = ApplicationContext.now();
