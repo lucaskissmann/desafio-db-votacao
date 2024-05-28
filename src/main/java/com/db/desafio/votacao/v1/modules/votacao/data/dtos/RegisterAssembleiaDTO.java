@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.db.desafio.votacao.v1.config.ApplicationContext;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Pauta;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -53,8 +54,8 @@ public class RegisterAssembleiaDTO
 	private LocalDate creationDate = LocalDate.now();
 
 	@Builder.Default
-	private LocalDateTime startDate = LocalDateTime.now();
+	private LocalDateTime startDate = ApplicationContext.now();
 	
     @Builder.Default
-	private LocalDateTime endDate = LocalDateTime.now().plusMinutes( 1 );
+	private LocalDateTime endDate = ApplicationContext.now().plusMinutes( 1 );
 }

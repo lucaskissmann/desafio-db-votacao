@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.db.desafio.votacao.v1.config.ApplicationContext;
 import com.db.desafio.votacao.v1.modules.votacao.data.enums.PautaEnum;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Voto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -51,10 +52,10 @@ public class RegisterPautaDTO
 	private List<Voto> votos = new ArrayList<>();
 
 	@Builder.Default
-	private LocalDateTime inicio = LocalDateTime.now();
+	private LocalDateTime inicio = ApplicationContext.now();
 
 	@Builder.Default
-	private LocalDateTime fim = LocalDateTime.now().plusMinutes( 1 );
+	private LocalDateTime fim = ApplicationContext.now().plusMinutes( 1 );
 
 	@Builder.Default
 	@JsonIgnore

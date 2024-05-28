@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 
 import java.util.List;
 
+import com.db.desafio.votacao.v1.config.ApplicationContext;
 import com.db.desafio.votacao.v1.modules.votacao.data.enums.PautaEnum;
 import com.db.desafio.votacao.v1.modules.votacao.data.enums.VotoEnum;
 
@@ -121,7 +122,7 @@ public class Pauta
      */
     private boolean isVotingPeriodActive() 
     {
-        return endDate.isAfter( LocalDateTime.now() );
+        return endDate.isAfter( ApplicationContext.now() );
     }
 
     /**
