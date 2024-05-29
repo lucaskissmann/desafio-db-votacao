@@ -65,7 +65,7 @@ public class Pauta
 
     @OneToMany( cascade = CascadeType.ALL )
 	@JoinTable(
-        name = "pauta_votacoes", 
+        name = "pautas_votacoes", 
         joinColumns = {
 		    @JoinColumn(
                 name = "ref_pauta",
