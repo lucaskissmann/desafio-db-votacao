@@ -75,7 +75,7 @@ public class VotoService
      */
     public Voto createVoto( RegisterVotoDTO dto )
     {
-        Associado associado = associadoService.getAssociadoByDocument( dto.getDocumentAssociado() );            
+        Associado associado = associadoService.getAssociadoByDocument( dto.getDocument() );            
         Pauta pauta = pautaService.getPautaById( dto.getPautaId() );
 
         Voto voto = Voto.builder()

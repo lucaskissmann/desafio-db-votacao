@@ -19,6 +19,8 @@
 
 package com.db.desafio.votacao.v1.modules.votacao.data.dtos;
 
+import com.db.desafio.votacao.v1.helpers.validation.CpfOrCnpj;
+
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,6 +36,7 @@ public class RegisterAssociadoDTO
     @NotNull( message = "O nome do associado é obrigatório." )
 	private String name;
 
+    @CpfOrCnpj()
     @NotNull( message = "O documento (CPF ou CNPJ) do associado é obrigatório." )
     private String document;
 }

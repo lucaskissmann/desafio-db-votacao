@@ -19,6 +19,7 @@
 
 package com.db.desafio.votacao.v1.modules.votacao.data.dtos;
 
+import com.db.desafio.votacao.v1.helpers.validation.CpfOrCnpj;
 import com.db.desafio.votacao.v1.modules.votacao.data.enums.VotoEnum;
 
 import jakarta.validation.constraints.NotNull;
@@ -34,11 +35,12 @@ import lombok.NoArgsConstructor;
 public class RegisterVotoDTO 
 {
     @NotNull( message = "O documento do associado é obrigatório." )
-    String documentAssociado;
+    String document;
     
     @NotNull( message = "O id da pauta é obrigatório." )
     Long pautaId;
     
+    @CpfOrCnpj()
     @NotNull( message = "O voto é obrigatório ('Sim', 'Não', 'Branco', 'Abstenção')" )
     VotoEnum voto;
 }
