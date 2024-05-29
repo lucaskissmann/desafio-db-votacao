@@ -30,6 +30,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SwaggerConfig 
 {
+    public static final String SUCCESS_MESSAGE = "Operação bem sucedida";
+    public static final String NOT_FOUND_MESSAGE = "Objeto não encontrado com informações enviadas";
+    public static final String BAD_REQUEST_MESSAGE = "Dados enviados inválidos, confira documentação";
+    public static final String UNPROCESSABLE_ENTITY_MESSAGE = "Recurso já existente para atributos enviados";
+
     @Bean
     OpenAPI apiInfo() 
     {
