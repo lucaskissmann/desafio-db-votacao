@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.db.desafio.votacao.v1.config.ApplicationContext;
 import com.db.desafio.votacao.v1.helpers.exceptions.BadRequestException;
 import com.db.desafio.votacao.v1.helpers.exceptions.NotFoundException;
 import com.db.desafio.votacao.v1.modules.votacao.data.dtos.PautaDTO;
@@ -92,6 +93,7 @@ public class PautaService
      */
     public Pauta addPauta( Pauta pauta )
     {
+        this.validatePautaDate( pauta );
         return this.pautaRepository.save( pauta );
     }
 
@@ -102,6 +104,7 @@ public class PautaService
      */
     public void updatePauta( Pauta pauta )
     {
+        this.validatePautaDate( pauta );
         this.pautaRepository.save( pauta );
     }
 
@@ -134,5 +137,19 @@ public class PautaService
                 .abstention( voteCount.get( VotoEnum.ABSTENCAO ))
                 .protest( voteCount.get( VotoEnum.BRANCO ))
                 .build();
+    }
+
+    /**
+     * validatePautaDate
+     * 
+     * @param pauta Pauta
+     */
+    public void validatePautaDate( Pauta pauta )
+    {
+        if( pauta.getStartDate().toLocalDate().isBefore( ApplicationContext.today()))
+            throw new BadRequestException("A pauta '" + pauta.getName() + "' não pode ter data inicial anterior a data atual.");
+        
+        if( pauta.getEndDate().isBefore( pauta.getStartDate() ))
+            throw new BadRequestException("Horário final da pauta deve ser posterior ao horário inicial.");
     }
 }
