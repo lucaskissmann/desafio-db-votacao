@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -35,6 +36,7 @@ import com.db.desafio.votacao.v1.modules.votacao.data.enums.AssociadoEnum;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Associado;
 import com.db.desafio.votacao.v1.modules.votacao.data.repositories.AssociadoRepository;
 
+@Service
 public class AssociadoService 
 {
     @Autowired
