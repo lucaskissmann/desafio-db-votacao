@@ -34,6 +34,7 @@ import com.db.desafio.votacao.v1.config.ApplicationContext;
 import com.db.desafio.votacao.v1.modules.Controller;
 import com.db.desafio.votacao.v1.modules.votacao.data.dtos.RegisterAssembleiaDTO;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Assembleia;
+import com.db.desafio.votacao.v1.modules.votacao.data.swagger.AssembleiaSwagger;
 import com.db.desafio.votacao.v1.modules.votacao.services.AssembleiaService;
 
 import jakarta.validation.Valid;
@@ -43,6 +44,8 @@ import jakarta.validation.Valid;
 public class AssembleiaController
     extends 
         Controller
+    implements
+        AssembleiaSwagger
 {
     @Autowired
     private AssembleiaService assembleiaService;
@@ -52,6 +55,7 @@ public class AssembleiaController
      * 
      * @return ResponseEntity<List<Assembleia>>
      */
+    @Override
     @GetMapping()
     public ResponseEntity<List<Assembleia>> getAssembleias()
     {
@@ -63,6 +67,7 @@ public class AssembleiaController
      * 
      * @return ResponseEntity<Assembleia>
      */
+    @Override
     @GetMapping("{assembleiaId}")
     public ResponseEntity<Assembleia> getAssembleia( @PathVariable("assembleiaId") long assembleiaId )
     {
@@ -75,6 +80,7 @@ public class AssembleiaController
      * @param assembleiaDTO RegisterAssembleiaDTO
      * @return ResponseEntity<Assembleia>
      */
+    @Override
     @PostMapping()
     public ResponseEntity<Assembleia> createAssembleia( @RequestBody @Valid RegisterAssembleiaDTO assembleiaDTO )
     {

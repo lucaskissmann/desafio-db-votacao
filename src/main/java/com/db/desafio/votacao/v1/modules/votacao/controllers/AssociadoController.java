@@ -34,6 +34,7 @@ import com.db.desafio.votacao.v1.config.ApplicationContext;
 import com.db.desafio.votacao.v1.modules.Controller;
 import com.db.desafio.votacao.v1.modules.votacao.data.dtos.RegisterAssociadoDTO;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Associado;
+import com.db.desafio.votacao.v1.modules.votacao.data.swagger.AssociadoSwagger;
 import com.db.desafio.votacao.v1.modules.votacao.services.AssociadoService;
 
 import jakarta.validation.Valid;
@@ -43,6 +44,8 @@ import jakarta.validation.Valid;
 public class AssociadoController 
     extends 
         Controller
+    implements
+        AssociadoSwagger
 {
     @Autowired
     private AssociadoService associadoService;
@@ -52,6 +55,7 @@ public class AssociadoController
      * 
      * @return ResponseEntity<List<Associado>>
      */
+    @Override
     @GetMapping()
     public ResponseEntity<List<Associado>> getAssociados() 
     {
@@ -64,6 +68,7 @@ public class AssociadoController
      * @param associadoDTO RegisterAssociadoDTO
      * @return ResponseEntity<Associado>
      */
+    @Override
     @PostMapping()
     public ResponseEntity<Associado> createAssociado( @RequestBody @Valid RegisterAssociadoDTO associadoDTO ) 
     {

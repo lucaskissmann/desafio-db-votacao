@@ -33,6 +33,7 @@ import com.db.desafio.votacao.v1.config.ApplicationContext;
 import com.db.desafio.votacao.v1.modules.Controller;
 import com.db.desafio.votacao.v1.modules.votacao.data.dtos.RegisterVotoDTO;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Voto;
+import com.db.desafio.votacao.v1.modules.votacao.data.swagger.VotoSwagger;
 import com.db.desafio.votacao.v1.modules.votacao.services.VotoService;
 
 import jakarta.validation.Valid;
@@ -42,6 +43,8 @@ import jakarta.validation.Valid;
 public class VotoController
     extends
         Controller
+    implements
+        VotoSwagger
 {
     @Autowired
     private VotoService votoService;
@@ -51,6 +54,7 @@ public class VotoController
      * 
      * @return List<Voto>
      */
+    @Override
     @GetMapping()
     public ResponseEntity<List<Voto>> getVotos() 
     {
@@ -63,6 +67,7 @@ public class VotoController
      * @param votoDTO RegisterVotoDTO
      * @return
      */
+    @Override
     @PostMapping()
     public ResponseEntity<Voto> createVoto( @RequestBody @Valid RegisterVotoDTO votoDTO ) 
     {    

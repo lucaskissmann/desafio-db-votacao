@@ -35,6 +35,7 @@ import com.db.desafio.votacao.v1.modules.Controller;
 import com.db.desafio.votacao.v1.modules.votacao.data.dtos.PautaDTO;
 import com.db.desafio.votacao.v1.modules.votacao.data.dtos.RegisterPautaDTO;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Pauta;
+import com.db.desafio.votacao.v1.modules.votacao.data.swagger.PautaSwagger;
 import com.db.desafio.votacao.v1.modules.votacao.services.PautaService;
 
 import jakarta.validation.Valid;
@@ -44,6 +45,8 @@ import jakarta.validation.Valid;
 public class PautaController
     extends
         Controller
+    implements
+        PautaSwagger
 {
     @Autowired
     private PautaService pautaService;
@@ -79,6 +82,7 @@ public class PautaController
      * @param pautaId long
      * @return ResponseEntity<PautaResultDTO>
      */
+    @Override
     @GetMapping("{pautaId}")
     public ResponseEntity<PautaDTO> getPautaResult( @PathVariable("pautaId") long pautaId )
     {
