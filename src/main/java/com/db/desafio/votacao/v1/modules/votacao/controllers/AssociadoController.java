@@ -44,7 +44,6 @@ public class AssociadoController
     extends 
         Controller
 {
-
     @Autowired
     private AssociadoService associadoService;
 
