@@ -24,9 +24,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.db.desafio.votacao.v1.config.ApplicationContext;
+import com.db.desafio.votacao.v1.helpers.exceptions.BadRequestException;
 import com.db.desafio.votacao.v1.helpers.exceptions.NotFoundException;
 import com.db.desafio.votacao.v1.modules.votacao.data.dtos.RegisterAssembleiaDTO;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Assembleia;
+import com.db.desafio.votacao.v1.modules.votacao.data.models.Pauta;
 import com.db.desafio.votacao.v1.modules.votacao.data.repositories.AssembleiaRepository;
 
 @Service
@@ -66,6 +69,7 @@ public class AssembleiaService
      */
     public void updateAssembleia( Assembleia assembleia )
     {
+        this.validateAssembleiaDates( assembleia );
         assembleiaRepository.save( assembleia );
     }
 
@@ -96,7 +100,35 @@ public class AssembleiaService
      */
     public Assembleia addAssembleia( Assembleia assembleia )
     {
+        this.validateAssembleiaDates( assembleia );
         return assembleiaRepository.save( assembleia );
+    }
+
+    /**
+     * isValidDates
+     * 
+     * @param assembleia Assembleia
+     * @param pauta Pauta
+     * @return boolean
+     */
+    public boolean isValidDates( Assembleia assembleia, Pauta pauta )
+    {
+        return pauta.getStartDate().toLocalDate().isBefore( assembleia.getStartDate().toLocalDate() )
+            || pauta.getEndDate().toLocalDate().isAfter( assembleia.getEndDate().toLocalDate() );
+    }
+
+    /**
+     * validateAssembleiaDates
+     * 
+     * @param assembleia Assembleia
+     */
+    public void validateAssembleiaDates( Assembleia assembleia )
+    {
+        if( assembleia.getStartDate().toLocalDate().isBefore( ApplicationContext.today() ))
+            throw new BadRequestException("A assembleia '" + assembleia.getName() + "' não pode ter data inicial anterior a data atual.");
+        
+        if( assembleia.getEndDate().isBefore( assembleia.getStartDate() ))
+            throw new BadRequestException("Data final da assembleia deve ser posterior a data inicial.");
     }
 
 }

@@ -33,6 +33,7 @@ import com.db.desafio.votacao.v1.helpers.exceptions.NotFoundException;
 import com.db.desafio.votacao.v1.modules.votacao.data.dtos.PautaDTO;
 import com.db.desafio.votacao.v1.modules.votacao.data.dtos.RegisterPautaDTO;
 import com.db.desafio.votacao.v1.modules.votacao.data.enums.VotoEnum;
+import com.db.desafio.votacao.v1.modules.votacao.data.models.Assembleia;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Pauta;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Voto;
 import com.db.desafio.votacao.v1.modules.votacao.data.repositories.PautaRepository;
@@ -43,6 +44,9 @@ public class PautaService
 {
     @Autowired
     private PautaRepository pautaRepository;
+
+    @Autowired
+    private AssembleiaService assembleiaService;
 
     /**
      * getPautas
@@ -81,8 +85,18 @@ public class PautaService
                             .startDate( dto.getStartDate() )
                             .endDate( dto.getEndDate() )
                             .build();
+
+        if( assembleiaService.isValidDates( assembleiaService.getAssembleiaById( dto.getAssembleiaId() ), pauta ))
+            throw new BadRequestException("Data inicial e final da Pauta devem estar dentro do escopo de datas da Assembleia" );
                             
-        return this.addPauta( pauta );
+        this.addPauta( pauta );
+
+        Assembleia assembleia = assembleiaService.getAssembleiaById( dto.getAssembleiaId() );
+
+        assembleia.addPauta( pauta );
+        assembleiaService.updateAssembleia( assembleia );
+
+        return pauta;
     }
 
     /**

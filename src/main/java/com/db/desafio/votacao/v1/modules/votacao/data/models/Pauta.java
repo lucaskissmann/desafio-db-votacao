@@ -60,8 +60,8 @@ public class Pauta
     @Column( name = "name", nullable = false )
     private String name;
 
-    @Column( name = "description", nullable = true )
-    private String description;
+    @Builder.Default
+    private String description = "";
 
     @OneToMany( cascade = CascadeType.ALL )
 	@JoinTable(
@@ -143,6 +143,10 @@ public class Pauta
         else if( approvedVotes > reprovedVotes ) 
         {
             this.state = PautaEnum.APROVADA;
+        }
+        else if( approvedVotes == 0 && reprovedVotes == 0 )
+        {
+            this.state = PautaEnum.ANULADA;
         }
         else 
         {
