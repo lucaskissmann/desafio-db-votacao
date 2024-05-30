@@ -20,6 +20,7 @@
 package com.db.desafio.votacao.v1.modules.votacao.data.models;
 
 import com.db.desafio.votacao.v1.modules.votacao.data.enums.VotoEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -44,8 +45,9 @@ public class Voto
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn( name = "ref_pauta" )
     private Pauta pauta;

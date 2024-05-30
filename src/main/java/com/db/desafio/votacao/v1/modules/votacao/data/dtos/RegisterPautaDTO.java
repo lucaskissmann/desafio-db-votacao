@@ -49,8 +49,8 @@ public class RegisterPautaDTO
 	@Builder.Default
 	private String description = "";
 
-	@Builder.Default
 	@JsonIgnore
+	@Builder.Default
 	private List<Voto> votos = new ArrayList<>();
 
 	@Builder.Default
@@ -59,7 +59,7 @@ public class RegisterPautaDTO
 	@Builder.Default
 	private LocalDateTime endDate = ApplicationContext.now().plusMinutes( 1 );
 
-	@Builder.Default
 	@JsonIgnore
-	private PautaEnum state = PautaEnum.AGUARDANDO_VOTACAO;
+	@Builder.Default
+	private PautaEnum status = PautaEnum.AGUARDANDO_VOTACAO;
 }

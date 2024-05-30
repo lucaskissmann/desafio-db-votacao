@@ -34,13 +34,13 @@ import lombok.NoArgsConstructor;
 @Data
 public class RegisterVotoDTO 
 {
+    @CpfOrCnpj()
     @NotNull( message = "O documento do associado é obrigatório." )
     String document;
     
     @NotNull( message = "O id da pauta é obrigatório." )
     Long pautaId;
     
-    @CpfOrCnpj()
     @NotNull( message = "O voto é obrigatório ('Sim', 'Não', 'Branco', 'Abstenção')" )
     VotoEnum voto;
 }
