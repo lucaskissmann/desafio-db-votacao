@@ -33,4 +33,5 @@ public interface AssociadoRepository
         JpaRepository<Associado, Long> 
 {
     Optional<Associado> findByDocument( String document );
+    boolean existsByDocument( String document );
 }
