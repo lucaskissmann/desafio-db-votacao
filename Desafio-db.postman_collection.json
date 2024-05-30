@@ -1,0 +1,332 @@
+{
+	"info": {
+		"_postman_id": "f76d7e37-7d9f-4bb9-a16b-f806fb82d170",
+		"name": "Desafio-db",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26744574",
+		"_collection_link": "https://red-crescent-765202.postman.co/workspace/testes-development~28fcc6d0-d686-4dcc-bd5a-e5ff9f6775a2/collection/26744574-f76d7e37-7d9f-4bb9-a16b-f806fb82d170?action=share&source=collection_link&creator=26744574"
+	},
+	"item": [
+		{
+			"name": "Pauta",
+			"item": [
+				{
+					"name": "Buscar pautas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/pautas",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pautas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Pauta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"assembleiaId\": \"1\",\r\n    \"name\": \"Pauta teste\",\r\n    \"startDate\": \"2024-07-23T18:00:00\",\r\n    \"endDate\": \"2024-07-23T18:30:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/pautas",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pautas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar resultado de Pauta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/pautas/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pautas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Assembleia",
+			"item": [
+				{
+					"name": "Buscar assembleias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/assembleias",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"assembleias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar assembleia pelo ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/assembleias/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"assembleias",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar assembleia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Assembleia teste\",\r\n    \"startDate\": \"2024-07-20\",\r\n    \"endDate\": \"2024-10-20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/assembleias",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"assembleias"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Associados",
+			"item": [
+				{
+					"name": "Buscar associados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/associados",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"associados"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar associado por documento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/associados/53347243030",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"associados",
+								"53347243030"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Associado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Lucas Kissmann\",\r\n    \"document\": \"65977371055\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/associados",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"associados"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Validação documento",
+			"item": [
+				{
+					"name": "Validar documento",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "type",
+								"value": "CPF",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/validators/65977371055",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"validators",
+								"65977371055"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Voto",
+			"item": [
+				{
+					"name": "Buscar votos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/votos",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"votos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar voto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"document\": \"65977371055\",\r\n    \"pautaId\": \"1\",\r\n    \"voto\": \"Sim\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/votos",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"votos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:8080/v1"
+		}
+	]
+}
