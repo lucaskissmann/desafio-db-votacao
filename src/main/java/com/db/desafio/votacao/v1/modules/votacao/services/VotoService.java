@@ -24,7 +24,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.db.desafio.votacao.v1.config.ApplicationContext;
+import com.db.desafio.votacao.context.ApplicationContext;
 import com.db.desafio.votacao.v1.helpers.exceptions.BadRequestException;
 import com.db.desafio.votacao.v1.modules.votacao.data.dtos.RegisterVotoDTO;
 import com.db.desafio.votacao.v1.modules.votacao.data.enums.AssociadoEnum;

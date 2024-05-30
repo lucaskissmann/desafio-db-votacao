@@ -18,7 +18,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.db.desafio.votacao.v1.config.ApplicationContext;
+import com.db.desafio.votacao.context.ApplicationContext;
 import com.db.desafio.votacao.v1.helpers.QueryProvider;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Assembleia;
 import com.db.desafio.votacao.v1.modules.votacao.models.AssembleiaStub;

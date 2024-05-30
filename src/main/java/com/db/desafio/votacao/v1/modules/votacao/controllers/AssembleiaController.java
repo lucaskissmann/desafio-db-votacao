@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.db.desafio.votacao.v1.config.ApplicationContext;
+import com.db.desafio.votacao.context.ApplicationContext;
 import com.db.desafio.votacao.v1.modules.Controller;
 import com.db.desafio.votacao.v1.modules.votacao.data.dtos.RegisterAssembleiaDTO;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Assembleia;

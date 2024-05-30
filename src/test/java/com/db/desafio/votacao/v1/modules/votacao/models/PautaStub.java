@@ -1,7 +1,7 @@
 
 package com.db.desafio.votacao.v1.modules.votacao.models;
 
-import com.db.desafio.votacao.v1.config.ApplicationContext;
+import com.db.desafio.votacao.context.ApplicationContext;
 import com.db.desafio.votacao.v1.modules.votacao.data.dtos.RegisterPautaDTO;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Pauta;
 

@@ -23,7 +23,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.db.desafio.votacao.v1.config.ApplicationContext;
+import com.db.desafio.votacao.context.ApplicationContext;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

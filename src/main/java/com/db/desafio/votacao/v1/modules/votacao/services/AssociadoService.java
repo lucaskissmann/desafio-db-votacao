@@ -28,7 +28,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.db.desafio.votacao.v1.config.ApplicationContext;
+import com.db.desafio.votacao.context.ApplicationContext;
 import com.db.desafio.votacao.v1.helpers.exceptions.DuplicateObjectException;
 import com.db.desafio.votacao.v1.helpers.exceptions.NotFoundException;
 import com.db.desafio.votacao.v1.modules.votacao.data.dtos.RegisterAssociadoDTO;

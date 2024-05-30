@@ -17,7 +17,7 @@
  * 
  */
 
-package com.db.desafio.votacao.v1.config;
+package com.db.desafio.votacao.context;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
