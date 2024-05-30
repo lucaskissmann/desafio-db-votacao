@@ -29,7 +29,7 @@ public enum PautaEnum
     ANULADA( "Anulada" ),
     AGUARDANDO_VOTACAO( "Aguardando votação" );
 
-    private final String state;
+    private final String status;
 
     /**
      * PautaEnum
@@ -38,7 +38,7 @@ public enum PautaEnum
      */
     PautaEnum( String voto ) 
     {
-        this.state = voto;
+        this.status = voto;
     }
 
     /**
@@ -49,6 +49,6 @@ public enum PautaEnum
     @JsonValue
     public String getValue() 
     {
-        return state;
+        return status;
     }
 }

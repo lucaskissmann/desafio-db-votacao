@@ -42,7 +42,7 @@ public class ValidatorService
         {
             Validator validator = new Validator();
             
-            validator.setState( ValidatorEnum.ABLE_TO_VOTE );
+            validator.setStatus( ValidatorEnum.ABLE_TO_VOTE );
 
             return validator;
         }

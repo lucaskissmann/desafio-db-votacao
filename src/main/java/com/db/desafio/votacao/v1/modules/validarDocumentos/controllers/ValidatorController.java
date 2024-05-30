@@ -65,7 +65,7 @@ public class ValidatorController
         catch( NotFoundException notFoundException )
         {
             Validator validator = new Validator();
-            validator.setState( ValidatorEnum.UNABLE_TO_VOTE );
+            validator.setStatus( ValidatorEnum.UNABLE_TO_VOTE );
 
             return new ResponseEntity<Validator>( validator, HttpStatus.NOT_FOUND );
         }

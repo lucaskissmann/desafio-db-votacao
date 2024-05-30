@@ -20,7 +20,6 @@
 package com.db.desafio.votacao.v1.modules.votacao.data.dtos;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,11 +50,11 @@ public class RegisterAssembleiaDTO
 	private List<Pauta> pautas = new ArrayList<>();
 
 	@Builder.Default
-	private LocalDate createdAt = LocalDate.now();
+	private LocalDate createdAt = ApplicationContext.today();
 
 	@Builder.Default
-	private LocalDateTime startDate = ApplicationContext.now();
+	private LocalDate startDate = ApplicationContext.today();
 	
     @Builder.Default
-	private LocalDateTime endDate = ApplicationContext.now().plusMinutes( 1 );
+	private LocalDate endDate = ApplicationContext.today().plusDays( 1 );
 }

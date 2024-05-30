@@ -90,13 +90,13 @@ public class AssociadoService
      */
     public Associado addAssociado( Associado associado )
     {
-        if( getAssociadoByDocument( associado.getDocument() ) != null )
+        if( associadoRepository.existsByDocument( associado.getDocument() ) )
         {
             throw new DuplicateObjectException( "Já existe um associado cadastrado com este documento: " + associado.getDocument() );
         }
 
         AssociadoEnum status = validateDocument( associado.getDocument() ) ? AssociadoEnum.ABLE_TO_VOTE : AssociadoEnum.UNABLE_TO_VOTE;
-        associado.setState( status );
+        associado.setStatus( status );
 
         return associadoRepository.save( associado );
     }
@@ -110,7 +110,7 @@ public class AssociadoService
     public boolean validateDocument( String document )
     {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl( ApplicationContext.getServerBaseUrl() )
-                                                                .path( "/valid/{cpfOrCnpj}" );
+                                                                .path( "/validators/{cpfOrCnpj}" );
 
         String apiUrl = uriBuilder.buildAndExpand( document ).toUriString();
 

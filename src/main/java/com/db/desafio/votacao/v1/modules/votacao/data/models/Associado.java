@@ -44,7 +44,7 @@ public class Associado
 {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private Long id;
+    private long id;
 
     @Column( name = "name", nullable = false )
     private String name;
@@ -53,5 +53,5 @@ public class Associado
     private String document;
 
     @Enumerated( EnumType.STRING )
-    private AssociadoEnum state;
+    private AssociadoEnum status;
 }

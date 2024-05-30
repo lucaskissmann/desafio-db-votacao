@@ -87,70 +87,51 @@ public class Pauta
 
     @Transient
     @Enumerated( EnumType.STRING )
-    private PautaEnum state;
+    private PautaEnum status;
 
     /**
-     * getState
+     * getStatus
      * 
      * @return PautaEnum
      */
-    public PautaEnum getState()
+    public PautaEnum getStatus()
     {
-        updateState();
+        updateStatus();
 
-        return this.state;
+        return this.status;
     }
 
     /**
-     * updateState
+     * updateStatus
      */
-    public void updateState()
+    public void updateStatus()
     {
-        if( isVotingPeriodActive() )
+        if( endDate.isAfter( ApplicationContext.now() ))
         {
-            this.state = PautaEnum.AGUARDANDO_VOTACAO;
+            this.status = PautaEnum.AGUARDANDO_VOTACAO;
         }
         else 
         {
-            updateStateBasedOnVotes();
-        }
-    }
+            long approvedVotes = votos.stream().filter( voto -> voto.getVoto().equals( VotoEnum.SIM )).count();
+            long reprovedVotes = votos.stream().filter( voto -> voto.getVoto().equals( VotoEnum.NAO )).count();
 
-    /**
-     * isVotingPeriodActive
-     * 
-     * @return boolean
-     */
-    private boolean isVotingPeriodActive() 
-    {
-        return endDate.isAfter( ApplicationContext.now() );
-    }
-
-    /**
-     * updateStateBasedOnVotes
-     * 
-     */
-    private void updateStateBasedOnVotes() 
-    {
-        long approvedVotes = votos.stream().filter( voto -> voto.getVoto().equals( VotoEnum.SIM )).count();
-        long reprovedVotes = votos.stream().filter( voto -> voto.getVoto().equals( VotoEnum.NAO )).count();
-
-        if( approvedVotes == reprovedVotes ) 
-        {
-            this.state = PautaEnum.EMPATADA;
-
-        } 
-        else if( approvedVotes > reprovedVotes ) 
-        {
-            this.state = PautaEnum.APROVADA;
-        }
-        else if( approvedVotes == 0 && reprovedVotes == 0 )
-        {
-            this.state = PautaEnum.ANULADA;
-        }
-        else 
-        {
-            this.state = PautaEnum.REPROVADA;
+            if( approvedVotes == 0 && reprovedVotes == 0 )
+            {
+                this.status = PautaEnum.ANULADA;
+            }
+            else if( approvedVotes == reprovedVotes ) 
+            {
+                this.status = PautaEnum.EMPATADA;
+    
+            } 
+            else if( approvedVotes > reprovedVotes ) 
+            {
+                this.status = PautaEnum.APROVADA;
+            }
+            else 
+            {
+                this.status = PautaEnum.REPROVADA;
+            }
         }
     }
 

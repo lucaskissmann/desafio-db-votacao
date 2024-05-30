@@ -117,7 +117,7 @@ public class VotoService
             throw new BadRequestException("Pauta encerrada");
         }
 
-        if( voto.getAssociado().getState() == AssociadoEnum.UNABLE_TO_VOTE )
+        if( voto.getAssociado().getStatus() == AssociadoEnum.UNABLE_TO_VOTE )
         {
             throw new BadRequestException("Associado de documento '" + voto.getAssociado().getDocument() + "' não está apto para votar");
         }

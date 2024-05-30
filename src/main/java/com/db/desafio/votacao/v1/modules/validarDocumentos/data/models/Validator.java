@@ -33,5 +33,5 @@ import lombok.NoArgsConstructor;
 public class Validator 
 {
     @Builder.Default
-    ValidatorEnum state = ValidatorEnum.UNABLE_TO_VOTE;
+    ValidatorEnum status = ValidatorEnum.UNABLE_TO_VOTE;
 }

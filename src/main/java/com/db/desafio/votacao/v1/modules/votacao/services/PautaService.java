@@ -19,7 +19,7 @@
 
 package com.db.desafio.votacao.v1.modules.votacao.services;
 
-import java.util.EnumMap;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -35,7 +35,6 @@ import com.db.desafio.votacao.v1.modules.votacao.data.dtos.RegisterPautaDTO;
 import com.db.desafio.votacao.v1.modules.votacao.data.enums.VotoEnum;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Assembleia;
 import com.db.desafio.votacao.v1.modules.votacao.data.models.Pauta;
-import com.db.desafio.votacao.v1.modules.votacao.data.models.Voto;
 import com.db.desafio.votacao.v1.modules.votacao.data.repositories.PautaRepository;
 
 
@@ -132,19 +131,17 @@ public class PautaService
     {
         Pauta pauta = this.getPautaById( pautaId ); 
 
-        if( pauta.getVotos().isEmpty() )
-        {
-            throw new BadRequestException( "Não há nenhum voto para a pauta de id: #" + pautaId );
-        }
-
-        Map<VotoEnum, Long> voteCount = pauta.getVotos().stream()
-                                                        .collect(Collectors.groupingBy(Voto::getVoto, 
-                                                            () -> new EnumMap<>(VotoEnum.class), 
-                                                            Collectors.counting()));
+        Map<VotoEnum, Long> voteCount = Arrays.stream( VotoEnum.values() )
+                                            .collect( Collectors.toMap( (voto) -> voto, 
+                                                                        (voto) -> pauta.getVotos()
+                                                                                    .stream()
+                                                                                    .filter( (v) -> 
+                                                                                            v.getVoto() == voto )
+                                                                                    .count() ));
 
         return PautaDTO.builder()
                 .pautaId( pauta.getId() )
-                .status( pauta.getState() )
+                .status( pauta.getStatus() )
                 .total( pauta.getVotos().size() )
                 .approved( voteCount.get( VotoEnum.SIM ))
                 .rejected( voteCount.get( VotoEnum.NAO ))
