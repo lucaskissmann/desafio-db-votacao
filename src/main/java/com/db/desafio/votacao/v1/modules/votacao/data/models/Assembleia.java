@@ -20,7 +20,6 @@
 package com.db.desafio.votacao.v1.modules.votacao.data.models;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +50,7 @@ public class Assembleia
 {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private Long id;   
+    private long id;   
     
     private String name;
 
@@ -59,13 +58,14 @@ public class Assembleia
     private String description = "";
 
     @Builder.Default
+    @Column( name = "created_at", nullable = false)
     private LocalDate createdAt = ApplicationContext.today();
 
     @Column( name = "start_date", nullable = false )
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @Column( name = "end_date", nullable = false )
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
     @OneToMany( cascade = CascadeType.ALL )
     @JoinTable(

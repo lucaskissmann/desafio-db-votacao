@@ -113,8 +113,8 @@ public class AssembleiaService
      */
     public boolean isValidDates( Assembleia assembleia, Pauta pauta )
     {
-        return pauta.getStartDate().toLocalDate().isBefore( assembleia.getStartDate().toLocalDate() )
-            || pauta.getEndDate().toLocalDate().isAfter( assembleia.getEndDate().toLocalDate() );
+        return pauta.getStartDate().toLocalDate().isBefore( assembleia.getStartDate() )
+            || pauta.getEndDate().toLocalDate().isAfter( assembleia.getEndDate() );
     }
 
     /**
@@ -124,7 +124,7 @@ public class AssembleiaService
      */
     public void validateAssembleiaDates( Assembleia assembleia )
     {
-        if( assembleia.getStartDate().toLocalDate().isBefore( ApplicationContext.today() ))
+        if( assembleia.getStartDate().isBefore( ApplicationContext.today() ))
             throw new BadRequestException("A assembleia '" + assembleia.getName() + "' não pode ter data inicial anterior a data atual.");
         
         if( assembleia.getEndDate().isBefore( assembleia.getStartDate() ))
